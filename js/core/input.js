@@ -29,7 +29,8 @@ G.input = (() => {
     const p = G.display ? G.display.toVirtual(I.cx, I.cy) : { x: I.cx, y: I.cy };
     I.mx = p.x;
     I.my = p.y;
-    I.inside = p.x >= 0 && p.y >= 0 && p.x <= G.VW && p.y <= G.VH;
+    // 还没收到过鼠标事件时坐标是 (0,0)，不能算"在画面里"（否则左上角会画出光标）
+    I.inside = I.seen && p.x >= 0 && p.y >= 0 && p.x <= G.VW && p.y <= G.VH;
   }
 
   function gesture() {
@@ -45,12 +46,14 @@ G.input = (() => {
   }
 
   window.addEventListener('pointermove', (e) => {
+    I.seen = true;
     I.cx = e.clientX;
     I.cy = e.clientY;
     remap();
   });
   window.addEventListener('pointerdown', (e) => {
     if (menuOpen()) return;
+    I.seen = true;
     I.cx = e.clientX;
     I.cy = e.clientY;
     I.shift = e.shiftKey;
