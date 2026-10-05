@@ -1,0 +1,133 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  color: #ccc;
+  font-family: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  cursor: none;
+  outline: none;
+}
+
+body.modal #screen { cursor: default; }
+
+/* ---------- 设置菜单（DOM 浮层，按时代换皮） ---------- */
+#menu {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 10;
+  cursor: default;
+}
+#menu.open { display: flex; }
+#menu .panel {
+  min-width: 380px;
+  max-width: 520px;
+  padding: 22px 26px;
+  background: #050505;
+  border: 1px solid #555;
+  color: #ddd;
+  font-size: 15px;
+  line-height: 1.7;
+}
+#menu h2 { margin: 0 0 12px; font-size: 20px; font-weight: normal; letter-spacing: 2px; }
+#menu .row { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+#menu .row label { width: 92px; flex: none; }
+#menu input[type=range] { flex: 1; accent-color: currentColor; }
+#menu .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+#menu button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+#menu button:hover { background: rgba(255, 255, 255, 0.12); }
+#menu button.danger { color: #ff7b7b; }
+#menu textarea {
+  width: 100%;
+  box-sizing: border-box;
+  height: 90px;
+  margin-top: 10px;
+  font: 12px Consolas, monospace;
+  background: #000;
+  color: inherit;
+  border: 1px solid #444;
+  resize: vertical;
+  display: none;
+}
+#menu textarea.show { display: block; }
+#menu .hint { color: #888; font-size: 13px; margin-top: 10px; }
+#menu .stats { color: #999; font-size: 13px; margin-top: 8px; white-space: pre-line; }
+
+/* 时代皮肤 */
+#menu.skin-0 .panel { font-family: Consolas, "SimHei", monospace; color: #6dff9b; border-color: #2c7a45; background: #010a04; box-shadow: 0 0 24px rgba(60, 255, 120, 0.15); }
+#menu.skin-0.mono .panel { color: #d8d8d8; border-color: #666; background: #050505; box-shadow: none; }
+#menu.skin-1 .panel { font-family: "Microsoft YaHei UI", sans-serif; font-weight: 300; color: #dff4ff; border-color: #bfe9ff; background: #000; box-shadow: 0 0 18px rgba(170, 225, 255, 0.35); }
+#menu.skin-2 .panel { font-family: SimSun, "NSimSun", monospace; font-size: 16px; color: #fcfcfc; background: #000; border: 4px solid #fcfcfc; outline: 4px solid #000; box-shadow: 0 0 0 8px #3cbcfc; }
+#menu.skin-3 .panel { font-family: SimSun, "NSimSun", monospace; font-size: 16px; color: #fff8e0; background: linear-gradient(#20306a, #101838); border: 3px solid #e8d8a0; border-radius: 6px; box-shadow: 0 0 0 3px #3a2a10; }
+#menu.skin-4 .panel { color: #eef2ff; background: rgba(24, 26, 40, 0.75); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 18px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(120, 140, 255, 0.15); }
+#menu.skin-4 button { border-radius: 10px; border-color: rgba(255, 255, 255, 0.3); }
+#menu.skin-5 .panel { color: #e8ecff; background: rgba(6, 8, 20, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(180, 200, 255, 0.25); border-radius: 4px; }
+
+/* 结局留言输入 */
+#letter {
+  position: fixed;
+  left: 50%;
+  top: 62%;
+  transform: translate(-50%, -50%);
+  width: min(640px, 80vw);
+  display: none;
+  z-index: 8;
+  text-align: center;
+}
+#letter.open { display: block; }
+#letter input {
+  width: 100%;
+  box-sizing: border-box;
+  font: 22px "Microsoft YaHei UI", sans-serif;
+  color: #fff;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  outline: none;
+  text-align: center;
+  padding: 8px 4px;
+  caret-color: #fff;
+}
+#letter .tip { color: rgba(255, 255, 255, 0.55); font-size: 14px; margin-top: 12px; }
+
+/* 调试面板 */
+#debug {
+  position: fixed;
+  right: 6px;
+  top: 6px;
+  z-index: 20;
+  font: 12px Consolas, monospace;
+  color: #0f0;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid #0a0;
+  padding: 6px;
+  display: none;
+  cursor: default;
+  max-width: 260px;
+}
+#debug.open { display: block; }
+#debug button { font: inherit; color: #0f0; background: #010; border: 1px solid #0a0; margin: 2px; cursor: pointer; padding: 1px 5px; }
+#debug .line { margin: 3px 0; }
