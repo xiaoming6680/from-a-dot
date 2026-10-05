@@ -10,3 +10,7 @@ Thumbs.db
 
 # Claude Code 本机设置
 .claude/settings.local.json
+
+# 测试脚本输出
+tools/shots/
+__pycache__/
