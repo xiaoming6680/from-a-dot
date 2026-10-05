@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>从一个点开始</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="一个有结局的放置游戏：从一个点开始，画面随进度从终端一路进化到 3D。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23000'/%3E%3Crect x='6' y='6' width='4' height='4' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="screen" tabindex="0"></canvas>
+<div id="menu"></div>
+<div id="letter"><input id="letter-input" maxlength="60" autocomplete="off" spellcheck="false"><div class="tip">写一句话，留给下一个点。回车确认（可以留空）。</div></div>
+<div id="debug"></div>
+
+<script src="js/core/g.js"></script>
+<script src="js/core/input.js"></script>
+<script src="js/core/display.js"></script>
+<script src="js/core/audio.js"></script>
+<script src="js/core/music.js"></script>
+<script src="js/core/text.js"></script>
+<script src="js/core/econ.js"></script>
+<script src="js/core/story.js"></script>
+<script src="js/core/save.js"></script>
+<script src="js/core/ui.js"></script>
+<script src="js/core/gl3d.js"></script>
+
+<script src="js/eras/era0_terminal.js"></script>
+<script src="js/eras/era1_vector.js"></script>
+<script src="js/eras/era2_pixel.js"></script>
+<script src="js/eras/era3_parallax.js"></script>
+<script src="js/eras/era4_modern.js"></script>
+<script src="js/eras/era5_space.js"></script>
+
+<script src="js/fx/t01.js"></script>
+<script src="js/fx/t12.js"></script>
+<script src="js/fx/t23.js"></script>
+<script src="js/fx/t34.js"></script>
+<script src="js/fx/t45.js"></script>
+<script src="js/fx/ending.js"></script>
+
+<script src="js/core/debug.js"></script>
+<script src="js/core/main.js"></script>
+</body>
+</html>
